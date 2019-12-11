@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习,决策树,分类,监督学习," />
 
 
 
@@ -79,11 +79,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta name="description" content="决策树是一个非常常见并且优秀的机器学习算法，它易于理解、可解释性强，其可作为分类算法，也可用于回归模型。本文将分三篇介绍决策树，第一篇介绍基本树（包括 ID3、C4.5、CART），第二篇介绍 Random Forest、Adaboost、GBDT，第三篇介绍 Xgboost 和 LightGBM。 对于基本树我将大致从以下四个方面介绍每一个算法：思想、划分标准、剪枝策略，优缺点。 ID3ID3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】决策树（上）——ID3、C4.5、CART">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;02&#x2F;04&#x2F;decision-tree-one&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="决策树是一个非常常见并且优秀的机器学习算法，它易于理解、可解释性强，其可作为分类算法，也可用于回归模型。本文将分三篇介绍决策树，第一篇介绍基本树（包括 ID3、C4.5、CART），第二篇介绍 Random Forest、Adaboost、GBDT，第三篇介绍 Xgboost 和 LightGBM。 对于基本树我将大致从以下四个方面介绍每一个算法：思想、划分标准、剪枝策略，优缺点。 ID3ID3">
+<meta property="article:published_time" content="2019-02-04T15:14:34.000Z">
+<meta property="article:modified_time" content="2019-11-01T06:46:46.003Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="决策树">
+<meta property="article:tag" content="分类">
+<meta property="article:tag" content="监督学习">
 <meta name="twitter:card" content="summary">
 
 
@@ -114,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/04/decision-tree-one/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>【机器学习】决策树（上）——ID3、C4.5、CART | Hexo</title>
   
 
 
@@ -139,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -263,141 +270,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/11/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-11T14:58:47+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -427,9 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/04/decision-tree-one/" itemprop="url">【机器学习】决策树（上）——ID3、C4.5、CART</a></h1>
+          <h1 class="post-title" itemprop="name headline">【机器学习】决策树（上）——ID3、C4.5、CART</h1>
         
 
         <div class="post-meta">
@@ -501,9 +374,7 @@
       
 
       
-        
-          
-            <p>决策树是一个非常常见并且优秀的机器学习算法，它易于理解、可解释性强，其可作为分类算法，也可用于回归模型。本文将分三篇介绍决策树，第一篇介绍基本树（包括 ID3、C4.5、CART），第二篇介绍 Random Forest、Adaboost、GBDT，第三篇介绍 Xgboost 和 LightGBM。</p>
+        <p>决策树是一个非常常见并且优秀的机器学习算法，它易于理解、可解释性强，其可作为分类算法，也可用于回归模型。本文将分三篇介绍决策树，第一篇介绍基本树（包括 ID3、C4.5、CART），第二篇介绍 Random Forest、Adaboost、GBDT，第三篇介绍 Xgboost 和 LightGBM。</p>
 <p>对于基本树我将大致从以下四个方面介绍每一个算法：思想、划分标准、剪枝策略，优缺点。</p>
 <h1 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h1><p>ID3 算法是建立在奥卡姆剃刀（用较少的东西，同样可以做好事情）的基础上：越是小型的决策树越优于大的决策树。</p>
 <h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>从信息论的知识中我们知道：期望信息越小，信息熵越大，从而样本纯度越高。ID3 算法的核心思想就是以信息增益来度量特征选择，选择信息增益最大的特征进行分裂。算法采用自顶向下的贪婪搜索遍历可能的决策树空间（C4.5 也是贪婪搜索）。<br>其大致步骤为：</p>
@@ -637,8 +508,6 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
 <li><a href="https://www.zhihu.com/question/22697086" target="_blank" rel="noopener">CART 树怎么进行剪枝?</a></li>
 </ol>
 
-          
-        
       
     </div>
     
@@ -653,14 +522,42 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag"># 决策树</a>
+          
+            <a href="/tags/%E5%88%86%E7%B1%BB/" rel="tag"># 分类</a>
+          
+            <a href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 监督学习</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/11/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -670,10 +567,11 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -681,6 +579,10 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
 
 
           
+
+  
+
+
 
         </div>
         
@@ -701,8 +603,17 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -762,6 +673,22 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ID3"><span class="nav-number">1.</span> <span class="nav-text">ID3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思想"><span class="nav-number">1.1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#划分标准"><span class="nav-number">1.2.</span> <span class="nav-text">划分标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">1.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C4-5"><span class="nav-number">2.</span> <span class="nav-text">C4.5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思想-1"><span class="nav-number">2.1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#划分标准-1"><span class="nav-number">2.2.</span> <span class="nav-text">划分标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪枝策略"><span class="nav-number">2.3.</span> <span class="nav-text">剪枝策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预剪枝"><span class="nav-number">2.3.1.</span> <span class="nav-text">预剪枝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后剪枝"><span class="nav-number">2.3.2.</span> <span class="nav-text">后剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点-1"><span class="nav-number">2.4.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CART"><span class="nav-number">3.</span> <span class="nav-text">CART</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思想-2"><span class="nav-number">3.1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#划分标准-2"><span class="nav-number">3.2.</span> <span class="nav-text">划分标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失值处理"><span class="nav-number">3.3.</span> <span class="nav-text">缺失值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪枝策略-1"><span class="nav-number">3.4.</span> <span class="nav-text">剪枝策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类别不平衡"><span class="nav-number">3.5.</span> <span class="nav-text">类别不平衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归树"><span class="nav-number">3.6.</span> <span class="nav-text">回归树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连续值处理"><span class="nav-number">3.6.1.</span> <span class="nav-text">连续值处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测方式"><span class="nav-number">3.6.2.</span> <span class="nav-text">预测方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -909,6 +836,10 @@ C_\alpha(t) = C(t)+\alpha</script><p>通过 Breiman 证明我们知道一定存�
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
